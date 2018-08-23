@@ -28,5 +28,12 @@ lazy val `scalacheck-magnolia` = project.in(file("."))
     libraryDependencies ++= Seq(
       "org.scalacheck" %% "scalacheck" % "1.14.0",
       "com.propensive" %% "magnolia" % "0.10.0"
-    )
+    ),
+    // Sonatype settings
+    homepage := Some(url("https://github.com/mrdziuban/scalacheck-magnolia")),
+    scmInfo := Some(ScmInfo(url("https://github.com/mrdziuban/scalacheck-magnolia"), "git@github.com:mrdziuban/scalacheck-magnolia.git")),
+    developers := List(Developer("mrdziuban", "Matt Dziuban", "mrdziuban@gmail.com", url("https://github.com/mrdziuban"))),
+    licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
+    publishMavenStyle := true,
+    publishTo := Some(if (isSnapshot.value) Opts.resolver.sonatypeSnapshots else Opts.resolver.sonatypeStaging)
   )
