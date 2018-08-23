@@ -13,13 +13,13 @@ lazy val publishSettings = Seq(
 
 lazy val scalaVersions = List("2.12.6", "2.11.12")
 
-lazy val proj = crossProject(JVMPlatform, JSPlatform)
+lazy val `scalacheck-magnolia` = crossProject(JVMPlatform, JSPlatform)
   .in(file("."))
   .settings(publishSettings:_*)
   .settings(
     name := "scalacheck-magnolia",
     organization := "com.mrdziuban",
-    version := "0.0.1",
+    version := "0.0.2",
     addCompilerPlugin("io.tryp" % "splain" % "0.3.1" cross CrossVersion.patch),
     scalaVersion := crossScalaVersions.value.head,
     scalacOptions := Seq(
@@ -28,20 +28,25 @@ lazy val proj = crossProject(JVMPlatform, JSPlatform)
       "-feature",
       "-unchecked",
       "-Xfatal-warnings",
-      "-Xlint:-unused,_",
       "-Yno-adapted-args",
       "-Ywarn-dead-code",
       "-Ywarn-infer-any",
       "-Ywarn-nullary-override",
       "-Ywarn-nullary-unit",
       "-Ywarn-numeric-widen",
-      "-Ywarn-unused:imports,privates,locals",
       "-Ywarn-value-discard",
       "-Xfuture",
-      "-P:splain:all",
-      "-Ycache-plugin-class-loader:last-modified",
-      "-Ycache-macro-class-loader:last-modified",
-    ),
+      "-P:splain:all"
+    ) ++ (CrossVersion.partialVersion(scalaVersion.value) match {
+      case Some((2, v)) if v == 12 =>
+        Seq(
+          "-Xlint:-unused,_",
+          "-Ywarn-unused:imports,privates,locals",
+          "-Ycache-plugin-class-loader:last-modified",
+          "-Ycache-macro-class-loader:last-modified"
+        )
+      case _ => Seq("-Ywarn-unused-import")
+    }),
     libraryDependencies ++= Seq(
       "org.scalacheck" %%% "scalacheck" % "1.14.0",
       "com.propensive" %%% "magnolia" % "0.10.0"
@@ -50,11 +55,11 @@ lazy val proj = crossProject(JVMPlatform, JSPlatform)
   .jvmSettings(crossScalaVersions := scalaVersions)
   .jsSettings(crossScalaVersions := scalaVersions)
 
-lazy val projJVM = proj.jvm
-lazy val projJS = proj.js
+lazy val jvm = `scalacheck-magnolia`.jvm
+lazy val js = `scalacheck-magnolia`.js
 
-lazy val `scalacheck-magnolia` = project
+lazy val root = project
   .in(file("."))
   .settings(publish := {}, publishLocal := {}, PgpKeys.publishSigned := {})
-  .aggregate(projJVM, projJS)
-  .dependsOn(projJVM, projJS)
+  .aggregate(jvm, js)
+  .dependsOn(jvm, js)

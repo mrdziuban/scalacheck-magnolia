@@ -1,0 +1,9 @@
+-Xms1G
+-Xmx6G
+-Xss10M
+-XX:MaxInlineLevel=18
+-Dproduction=true
+-XX:+UseG1GC
+-XX:+UseStringDeduplication
+-XX:+UseAdaptiveSizePolicy
+-XX:+AggressiveOpts
