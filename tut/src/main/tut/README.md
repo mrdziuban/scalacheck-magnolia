@@ -1,6 +1,11 @@
-# magnolia-shapeless
+# scalacheck-magnolia
 
 [![Maven Central](https://img.shields.io/maven-central/v/com.mrdziuban/scalacheck-magnolia_2.12.svg)](https://search.maven.org/search?q=g:com.mrdziuban%20a:scalacheck-magnolia_2.12)
+
+scalacheck-magnolia performs generic derivation of scalacheck `Arbitrary` instances for product and sum types, i.e.
+case classes and ADTs, using [Magnolia](http://magnolia.work). Much of the code was inspired by
+[scalacheck-shapeless](https://github.com/alexarchambault/scalacheck-shapeless/blob/master/README.md), which I've
+found to work reliably, but cause huge compile time increases, especially for deeply nested case classes.
 
 ## Usage
 
