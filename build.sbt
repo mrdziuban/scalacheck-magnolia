@@ -1,5 +1,7 @@
 import sbtcrossproject.crossProject
 
+sonatypeProfileName := "com.mrdziuban"
+
 lazy val publishSettings = Seq(
   homepage := Some(url("https://github.com/mrdziuban/scalacheck-magnolia")),
   scmInfo := Some(ScmInfo(url("https://github.com/mrdziuban/scalacheck-magnolia"), "git@github.com:mrdziuban/scalacheck-magnolia.git")),
@@ -17,7 +19,7 @@ lazy val proj = crossProject(JVMPlatform, JSPlatform)
   .settings(
     name := "scalacheck-magnolia",
     organization := "com.mrdziuban",
-    version := "0.0.1-SNAPSHOT",
+    version := "0.0.1",
     addCompilerPlugin("io.tryp" % "splain" % "0.3.1" cross CrossVersion.patch),
     scalaVersion := crossScalaVersions.value.head,
     scalacOptions := Seq(
