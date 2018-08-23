@@ -32,19 +32,19 @@ object ScalacheckMagnolia {
   def dispatch[A](st: SealedTrait[Arbitrary, A])(): Arbitrary[A] =
     Arbitrary(st.subtypes match {
       case Nil => Gen.fail
-      case subtypes =>
+      case stHead :: stTail =>
         def gen(head: Subtype[Typeclass, A], tail: Seq[Subtype[Typeclass, A]]): Gen[A] =
           Gen.sized { size =>
             val nextSize = (size - 1).max(0)
             tail match {
               case Nil => Gen.resize(nextSize, Gen.lzy(head.typeclass.arbitrary))
-              case t => Gen.frequency(
+              case h :: t => Gen.frequency(
                 1 -> Gen.resize(nextSize, Gen.lzy(head.typeclass.arbitrary)),
-                t.size -> Gen.resize(nextSize, gen(t.head, t.tail)))
+                (t.length + 1) -> Gen.resize(nextSize, gen(h, t)))
             }
           }
 
-        gen(subtypes.head, subtypes.tail)
+        gen(stHead, stTail)
     })
 
   implicit def deriveArbitrary[A]: Arbitrary[A] = macro Magnolia.gen[A]
