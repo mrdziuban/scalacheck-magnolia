@@ -1,21 +1,9 @@
 import sbtcrossproject.crossProject
 
-sonatypeProfileName := "com.mrdziuban"
-
-lazy val publishSettings = Seq(
-  homepage := Some(url("https://github.com/mrdziuban/scalacheck-magnolia")),
-  scmInfo := Some(ScmInfo(url("https://github.com/mrdziuban/scalacheck-magnolia"), "git@github.com:mrdziuban/scalacheck-magnolia.git")),
-  developers := List(Developer("mrdziuban", "Matt Dziuban", "mrdziuban@gmail.com", url("https://github.com/mrdziuban"))),
-  licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
-  publishMavenStyle := true,
-  publishTo := Some(if (isSnapshot.value) Opts.resolver.sonatypeSnapshots else Opts.resolver.sonatypeStaging)
-)
-
 lazy val scalaVersions = List("2.12.6", "2.11.12")
 
 lazy val `scalacheck-magnolia` = crossProject(JVMPlatform, JSPlatform)
   .in(file("."))
-  .settings(publishSettings:_*)
   .settings(
     name := "scalacheck-magnolia",
     organization := "com.mrdziuban",
@@ -51,15 +39,14 @@ lazy val `scalacheck-magnolia` = crossProject(JVMPlatform, JSPlatform)
       "org.scalacheck" %%% "scalacheck" % "1.14.0",
       "com.propensive" %%% "magnolia" % "0.10.0"
     ),
+    // Publish settings
+    homepage := Some(url("https://github.com/mrdziuban/scalacheck-magnolia")),
+    scmInfo := Some(ScmInfo(url("https://github.com/mrdziuban/scalacheck-magnolia"), "git@github.com:mrdziuban/scalacheck-magnolia.git")),
+    developers := List(Developer("mrdziuban", "Matt Dziuban", "mrdziuban@gmail.com", url("https://github.com/mrdziuban"))),
+    licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0")),
+    publishMavenStyle := true,
+    publishTo := Some(if (isSnapshot.value) Opts.resolver.sonatypeSnapshots else Opts.resolver.sonatypeStaging),
+    sonatypeProfileName := "com.mrdziuban"
   )
   .jvmSettings(crossScalaVersions := scalaVersions)
   .jsSettings(crossScalaVersions := scalaVersions)
-
-lazy val jvm = `scalacheck-magnolia`.jvm
-lazy val js = `scalacheck-magnolia`.js
-
-lazy val root = project
-  .in(file("."))
-  .settings(publish := {}, publishLocal := {}, PgpKeys.publishSigned := {})
-  .aggregate(jvm, js)
-  .dependsOn(jvm, js)
