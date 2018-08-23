@@ -2,7 +2,7 @@ lazy val `scalacheck-magnolia` = project.in(file("."))
   .settings(
     name := "scalacheck-magnolia",
     organization := "com.mrdziuban",
-    version := "0.0.1-LOCAL",
+    version := "0.0.1-SNAPSHOT",
     addCompilerPlugin("io.tryp" % "splain" % "0.3.1" cross CrossVersion.patch),
     scalaVersion := "2.12.6",
     scalacOptions := Seq(
