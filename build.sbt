@@ -4,7 +4,7 @@ lazy val scalaVersions = List("2.12.6", "2.11.12")
 
 lazy val commonSettings = Seq(
   organization := "com.mrdziuban",
-  version := "0.0.2",
+  version := "0.0.3",
   addCompilerPlugin("io.tryp" % "splain" % "0.3.1" cross CrossVersion.patch),
   crossScalaVersions := scalaVersions,
   scalaVersion := crossScalaVersions.value.head,
@@ -12,6 +12,7 @@ lazy val commonSettings = Seq(
     "-deprecation",
     "-encoding", "UTF-8",
     "-feature",
+    "-language:higherKinds",
     "-unchecked",
     "-Xfatal-warnings",
     "-Yno-adapted-args",
@@ -42,7 +43,10 @@ lazy val `scalacheck-magnolia` = crossProject(JVMPlatform, JSPlatform)
     name := "scalacheck-magnolia",
     libraryDependencies ++= Seq(
       "org.scalacheck" %%% "scalacheck" % "1.14.0",
-      "com.propensive" %%% "magnolia" % "0.10.0"
+      "com.propensive" %%% "magnolia" % (CrossVersion.partialVersion(scalaVersion.value) match {
+        case Some((2, v)) if v == 11 => "0.10.0"
+        case _ => "0.12.0"
+      })
     ),
     // Publish settings
     homepage := Some(url("https://github.com/mrdziuban/scalacheck-magnolia")),
