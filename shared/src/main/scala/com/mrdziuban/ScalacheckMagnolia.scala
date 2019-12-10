@@ -30,7 +30,7 @@ object ScalacheckMagnolia {
     }.map(cc.rawConstruct(_)))
 
   def dispatch[A](st: SealedTrait[Arbitrary, A])(): Arbitrary[A] =
-    Arbitrary(st.subtypes match {
+    Arbitrary(st.subtypes.toList match {
       case Nil => Gen.fail
       case stHead :: stTail =>
         def gen(head: Subtype[Typeclass, A], tail: Seq[Subtype[Typeclass, A]]): Gen[A] =

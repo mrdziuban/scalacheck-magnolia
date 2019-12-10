@@ -4,7 +4,7 @@ lazy val scalaVersions = List("2.12.6", "2.11.12")
 
 lazy val commonSettings = Seq(
   organization := "com.mrdziuban",
-  version := "0.0.3",
+  version := "0.0.4",
   addCompilerPlugin("io.tryp" % "splain" % "0.3.1" cross CrossVersion.patch),
   crossScalaVersions := scalaVersions,
   scalaVersion := crossScalaVersions.value.head,
