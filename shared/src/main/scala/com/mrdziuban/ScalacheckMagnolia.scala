@@ -2,7 +2,6 @@ package com.mrdziuban
 
 import magnolia.{CaseClass, Magnolia, SealedTrait, Subtype}
 import org.scalacheck.{Arbitrary, Gen}
-import scala.language.experimental.macros
 
 object ScalacheckMagnolia {
   type Typeclass[A] = Arbitrary[A]

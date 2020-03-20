@@ -12,10 +12,11 @@ found to work reliably, but cause huge compile time increases, especially for de
 Add to your `build.sbt`:
 
 ```scala
-libraryDependencies += "com.mrdziuban" %% "scalacheck-magnolia" % "0.0.2"
+resolvers += Resolver.bintrayRepo("mrdziuban", "scalacheck-magnolia")
+libraryDependencies += "com.mrdziuban" %% "scalacheck-magnolia" % "0.1.0"
 ```
 
-This will pull in scalacheck 1.14.0 and magnolia 0.10.0.
+This will pull in scalacheck 1.14.3 and magnolia 0.12.8.
 
 To materialize `Arbitrary` instances for your case classes or sealed traits, import `com.mrdziuban.ScalacheckMagnolia._`.
 Magnolia can derive `Arbitrary` instances for case classes
