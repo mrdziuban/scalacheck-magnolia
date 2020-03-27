@@ -1,6 +1,6 @@
 # scalacheck-magnolia
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.mrdziuban/scalacheck-magnolia_2.12.svg)](https://search.maven.org/search?q=g:com.mrdziuban%20a:scalacheck-magnolia_2.12)
+[![Bintray](https://img.shields.io/bintray/v/mrdziuban/scalacheck-magnolia/scalacheck-magnolia)](bintray.com/mrdziuban/scalacheck-magnolia/scalacheck-magnolia/_latestVersion)
 
 scalacheck-magnolia performs generic derivation of scalacheck `Arbitrary` instances for product and sum types, i.e.
 case classes and ADTs, using [Magnolia](http://magnolia.work). Much of the code was inspired by
