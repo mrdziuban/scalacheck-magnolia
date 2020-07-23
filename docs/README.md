@@ -1,7 +1,5 @@
 # scalacheck-magnolia
 
-[![Maven Central](https://img.shields.io/maven-central/v/com.mrdziuban/scalacheck-magnolia_2.12.svg)](https://search.maven.org/search?q=g:com.mrdziuban%20a:scalacheck-magnolia_2.12)
-
 scalacheck-magnolia performs generic derivation of scalacheck `Arbitrary` instances for product and sum types, i.e.
 case classes and ADTs, using [Magnolia](http://magnolia.work). Much of the code was inspired by
 [scalacheck-shapeless](https://github.com/alexarchambault/scalacheck-shapeless/blob/master/README.md), which I've
@@ -13,15 +11,15 @@ Add to your `build.sbt`:
 
 ```scala
 resolvers += Resolver.bintrayRepo("mrdziuban", "scalacheck-magnolia")
-libraryDependencies += "com.mrdziuban" %% "scalacheck-magnolia" % "0.1.0"
+libraryDependencies += "com.mrdziuban" %% "scalacheck-magnolia" % "@VERSION@"
 ```
 
-This will pull in scalacheck 1.14.3 and magnolia 0.12.8.
+This will pull in scalacheck 1.14.3 and magnolia 0.16.0.
 
 To materialize `Arbitrary` instances for your case classes or sealed traits, import `com.mrdziuban.ScalacheckMagnolia._`.
 Magnolia can derive `Arbitrary` instances for case classes
 
-```tut:silent
+```scala mdoc:silent
 import com.mrdziuban.ScalacheckMagnolia._
 import org.scalacheck.Arbitrary
 
@@ -32,7 +30,7 @@ implicitly[Arbitrary[Test]]
 
 as well as for sealed traits
 
-```tut:silent
+```scala mdoc:silent
 sealed trait Foo
 case object Bar extends Foo
 case class Baz(s: String) extends Foo
@@ -42,12 +40,10 @@ implicitly[Arbitrary[Foo]]
 
 It can be used in scalacheck property tests like so:
 
-```tut:silent
+```scala mdoc:silent
 import org.scalacheck.Prop.forAll
 
-case class Test(i: Int, b: Boolean, s: String)
-
-forAll((t: Test) => true /* check some properties of Test */)
+forAll((_: Test) => true /* check some properties of Test */)
 ```
 
 ## License

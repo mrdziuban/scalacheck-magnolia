@@ -1,7 +1,5 @@
 # scalacheck-magnolia
 
-[![Bintray](https://img.shields.io/bintray/v/mrdziuban/scalacheck-magnolia/scalacheck-magnolia)](https://bintray.com/mrdziuban/scalacheck-magnolia/scalacheck-magnolia/_latestVersion)
-
 scalacheck-magnolia performs generic derivation of scalacheck `Arbitrary` instances for product and sum types, i.e.
 case classes and ADTs, using [Magnolia](http://magnolia.work). Much of the code was inspired by
 [scalacheck-shapeless](https://github.com/alexarchambault/scalacheck-shapeless/blob/master/README.md), which I've
@@ -13,7 +11,7 @@ Add to your `build.sbt`:
 
 ```scala
 resolvers += Resolver.bintrayRepo("mrdziuban", "scalacheck-magnolia")
-libraryDependencies += "com.mrdziuban" %% "scalacheck-magnolia" % "0.1.0"
+libraryDependencies += "com.mrdziuban" %% "scalacheck-magnolia" % "0.2.1"
 ```
 
 This will pull in scalacheck 1.14.3 and magnolia 0.16.0.
@@ -45,9 +43,7 @@ It can be used in scalacheck property tests like so:
 ```scala
 import org.scalacheck.Prop.forAll
 
-case class Test(i: Int, b: Boolean, s: String)
-
-forAll((t: Test) => true /* check some properties of Test */)
+forAll((_: Test) => true /* check some properties of Test */)
 ```
 
 ## License

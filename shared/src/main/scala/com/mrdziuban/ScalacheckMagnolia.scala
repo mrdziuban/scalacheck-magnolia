@@ -28,7 +28,7 @@ object ScalacheckMagnolia {
       }
     }.map(cc.rawConstruct(_)))
 
-  def dispatch[A](st: SealedTrait[Arbitrary, A])(): Arbitrary[A] =
+  def dispatch[A](st: SealedTrait[Arbitrary, A]): Arbitrary[A] =
     Arbitrary(st.subtypes.toList match {
       case Nil => Gen.fail
       case stHead :: stTail =>

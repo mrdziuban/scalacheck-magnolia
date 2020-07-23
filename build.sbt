@@ -3,11 +3,11 @@ import sbtcrossproject.crossProject
 Global / onChangedBuildSource := ReloadOnSourceChanges
 licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
 
-lazy val scalaVersions = List("2.13.1", "2.12.11")
+lazy val scalaVersions = List("2.13.3", "2.12.12")
 
 lazy val commonSettings = Seq(
   organization := "com.mrdziuban",
-  version := "0.2.0",
+  version := "0.2.1",
   crossScalaVersions := scalaVersions,
   scalaVersion := crossScalaVersions.value.head,
   skip in publish := true,
@@ -37,13 +37,13 @@ lazy val tut = project
   .in(file("tut"))
   .settings(commonSettings:_*)
   .settings(
-    scalacOptions := scalacOptions.value.filterNot(_.contains("warn-unused")),
-    tutTargetDirectory := baseDirectory.value / "..",
-    crossScalaVersions := Seq(),
-    scalaVersion := scalaVersions.find(_.startsWith("2.12")).get,
+    mdocIn := baseDirectory.value / ".." / "docs",
+    mdocOut := baseDirectory.value / "..",
+    mdocVariables := Map("VERSION" -> (`scalacheck-magnolia`.jvm / version).value),
+    mdocExtraArguments += "--no-link-hygiene",
     publish := {},
     publishLocal := {}
   )
   .dependsOn(`scalacheck-magnolia`.jvm)
-  .enablePlugins(TutPlugin)
+  .enablePlugins(MdocPlugin)
   .disablePlugins(BintrayPlugin)
