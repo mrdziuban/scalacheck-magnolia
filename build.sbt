@@ -3,11 +3,11 @@ import sbtcrossproject.crossProject
 Global / onChangedBuildSource := ReloadOnSourceChanges
 licenses += ("Apache-2.0", url("http://www.apache.org/licenses/LICENSE-2.0"))
 
-lazy val scalaVersions = List("2.13.3", "2.12.12")
+lazy val scalaVersions = List("2.13.4", "2.12.12")
 
 lazy val commonSettings = Seq(
   organization := "com.mrdziuban",
-  version := "0.2.1",
+  version := "0.3.0",
   crossScalaVersions := scalaVersions,
   scalaVersion := crossScalaVersions.value.head,
   skip in publish := true,
@@ -26,8 +26,8 @@ lazy val `scalacheck-magnolia` = crossProject(JVMPlatform, JSPlatform)
   .settings(
     name := "scalacheck-magnolia",
     libraryDependencies ++= Seq(
-      "org.scalacheck" %%% "scalacheck" % "1.14.3",
-      "com.propensive" %%% "magnolia" % "0.16.0",
+      "org.scalacheck" %%% "scalacheck" % "1.15.1",
+      "com.propensive" %%% "magnolia" % "0.17.0",
       "org.scala-lang" % "scala-reflect" % scalaVersion.value
     ),
     skip in publish := false
