@@ -13,7 +13,7 @@ lazy val noPublishSettings = Seq(
 
 lazy val commonSettings = Seq(
   organization := "com.mrdziuban",
-  version := "0.4.0",
+  version := "0.5.0",
   crossScalaVersions := scalaVersions,
   scalaVersion := crossScalaVersions.value.head,
   skip in publish := true,
@@ -35,7 +35,7 @@ lazy val scalacheckMagnolia = crossProject(JVMPlatform, JSPlatform)
   .settings(
     name := "scalacheck-magnolia",
     libraryDependencies ++= Seq(
-      "org.scalacheck" %%% "scalacheck" % "1.15.3",
+      "org.scalacheck" %%% "scalacheck" % "1.15.4",
       "com.propensive" %%% "magnolia" % "0.17.0",
       "org.scala-lang" % "scala-reflect" % scalaVersion.value
     ),
