@@ -14,7 +14,7 @@ resolvers += "mrdziuban-maven" at "https://raw.githubusercontent.com/mrdziuban/m
 libraryDependencies += "com.mrdziuban" %% "scalacheck-magnolia" % "@VERSION@"
 ```
 
-This will pull in scalacheck 1.15.3 and magnolia 0.17.0.
+This will pull in scalacheck @SCALACHECK_VERSION@ and magnolia @MAGNOLIA_VERSION@.
 
 To materialize `Arbitrary` instances for your case classes or sealed traits, import `com.mrdziuban.ScalacheckMagnolia._`.
 Magnolia can derive `Arbitrary` instances for case classes

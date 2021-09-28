@@ -29,14 +29,17 @@ lazy val root = project.in(file("."))
   .settings(noPublishSettings)
   .aggregate(scalacheckMagnolia.jvm, scalacheckMagnolia.js)
 
+lazy val scalacheckVersion = "1.15.4"
+lazy val magnoliaVersion = "0.17.0"
+
 lazy val scalacheckMagnolia = crossProject(JVMPlatform, JSPlatform)
   .in(file("."))
   .settings(commonSettings)
   .settings(
     name := "scalacheck-magnolia",
     libraryDependencies ++= Seq(
-      "org.scalacheck" %%% "scalacheck" % "1.15.4",
-      "com.propensive" %%% "magnolia" % "0.17.0",
+      "org.scalacheck" %%% "scalacheck" % scalacheckVersion,
+      "com.propensive" %%% "magnolia" % magnoliaVersion,
       "org.scala-lang" % "scala-reflect" % scalaVersion.value
     ),
     skip in publish := false
@@ -49,7 +52,11 @@ lazy val tut = project
   .settings(
     mdocIn := baseDirectory.value / ".." / "docs",
     mdocOut := baseDirectory.value / "..",
-    mdocVariables := Map("VERSION" -> (scalacheckMagnolia.jvm / version).value),
+    mdocVariables := Map(
+      "VERSION" -> (scalacheckMagnolia.jvm / version).value,
+      "SCALACHECK_VERSION" -> scalacheckVersion,
+      "MAGNOLIA_VERSION" -> magnoliaVersion
+    ),
     mdocExtraArguments += "--no-link-hygiene",
     publish := {},
     publishLocal := {}
