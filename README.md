@@ -1,3 +1,8 @@
+# Deprecation Notice
+
+This library is deprecated and no longer kept up to date or otherwise maintained.
+Consider using [`magnolify-scalacheck` module](https://github.com/spotify/magnolify) instead.
+
 # scalacheck-magnolia
 
 scalacheck-magnolia performs generic derivation of scalacheck `Arbitrary` instances for product and sum types, i.e.
